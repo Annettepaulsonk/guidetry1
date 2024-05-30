@@ -7,6 +7,9 @@ jobs:
   display-wd-info:
     runs-on: ubuntu-latest
     steps:
+      - name: Change Working Dir
+        working-directory: /home/runner
+        run: pwd
       - name: Display Working Directory & List Files
         run: |
           pwd
