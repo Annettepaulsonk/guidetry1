@@ -1,7 +1,7 @@
 name: Workflow Run
 on:
   workflow_run:
-    workflows: [event]
+    workflows: [Repositor]
     types: [completed]
 jobs:
   echo-string:
