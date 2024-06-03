@@ -1,4 +1,4 @@
-name: resuableworkflow
+name: usingreusable
 on:
   workflow_call:
     outputs:
