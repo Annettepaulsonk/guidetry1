@@ -4,7 +4,7 @@ on:
     outputs:
       date:
         description: "date value"
-        value: ${{ jobs.generate_output:.outputs.date}}
+        value: ${{ jobs.generate_output.outputs.date}}
 jobs:
   generate_output:
     runs-on: ubuntu-latest
