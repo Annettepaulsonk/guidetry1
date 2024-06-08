@@ -26,17 +26,17 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
-        username: annettepaulsonk
+        username: annettepaulson
         password: ${{ secrets.DOCTOKEN }}
 
     - name: Verify Docker Login
       run: |
         docker info
-        echo ${{ secrets.DOCTOKEN }} | docker login ghcr.io -u annettepaulsonk --password-stdin    
+        echo ${{ secrets.DOCTOKEN }} | docker login ghcr.io -u annettepaulson --password-stdin    
 
     - name: Build Docker Image
       run: |
-        docker build . --file Dockerfile --tag ghcr.io/annettepaulsonk/jmeter-with-plugins:latest
+        docker build . --file Dockerfile --tag ghcr.io/annettepaulson/jmeter-with-plugins:latest
 
     - name: Verify Docker Image Creation
       run: |
@@ -44,7 +44,7 @@ jobs:
 
     - name: Run JMeter Version Command
       run: |
-        docker run --rm --entrypoint "" ghcr.io/annettepaulsonk/jmeter-with-plugins:latest jmeter --version
+        docker run --rm --entrypoint "" ghcr.io/annettepaulson/jmeter-with-plugins:latest jmeter --version
     - name: Push Docker Image to GitHub Container Registry
       run: |
-        docker push ghcr.io/annettepaulsonk/jmeter-with-plugins:latest
+        docker push ghcr.io/annettepaulson/jmeter-with-plugins:latest
