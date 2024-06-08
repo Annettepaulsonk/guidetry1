@@ -34,8 +34,7 @@ jobs:
 
     - name: Run JMeter Version Command
       run: |
-        docker run --rm ghcr.io/annettepaulsonk/jmeter-with-plugins:latest jmeter --version
-
+        docker run --rm --entrypoint "" ghcr.io/annettepaulsonk/jmeter-with-plugins:latest jmeter --version
     - name: Push Docker Image to GitHub Container Registry
       run: |
         docker push ghcr.io/annettepaulsonk/jmeter-with-plugins:latest
