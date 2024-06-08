@@ -29,6 +29,11 @@ jobs:
         username: annettepaulsonk
         password: ${{ secrets.DOCTOKEN }}
 
+    - name: Verify Docker Login
+      run: |
+        docker info
+        echo ${{ secrets.DOCTOKEN }} | docker login ghcr.io -u annettepaulsonk --password-stdin    
+
     - name: Build Docker Image
       run: |
         docker build . --file Dockerfile --tag ghcr.io/annettepaulsonk/jmeter-with-plugins:latest
