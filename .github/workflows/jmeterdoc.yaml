@@ -1,0 +1,41 @@
+name: Build, Verify, and Push JMeter Docker Image
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.PATKEY }}
+
+    - name: Build Docker Image
+      run: |
+        docker build . --file jmeterdocfile --tag ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest
+
+    - name: Verify Docker Image Creation
+      run: |
+        docker images ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest
+
+    - name: Run JMeter Version Command
+      run: |
+        docker run --rm ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest jmeter --version
+
+    - name: Push Docker Image to GitHub Container Registry
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest
