@@ -45,4 +45,6 @@ jobs:
     - name: Output Docker Image Name
       run: echo "Docker image name is ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
 
-   
+    -  name: Check JMeter Bin Path
+       run: |
+        docker run --rm ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ls -l /opt/apache-jmeter-5.5/bin
