@@ -20,6 +20,16 @@ jobs:
 
     - name: Pull Docker Image
       run: docker pull ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest
+
+    - name: Verify JMeter Plugins
+      run: |
+        docker run --rm ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest /bin/sh -c "\
+          echo 'Listing contents of /opt/apache-jmeter-5.5/lib/ext:' && \
+          ls -l /opt/apache-jmeter-5.5/lib/ext && \
+          echo 'Listing contents of /opt/apache-jmeter-5.5/lib:' && \
+          ls -l /opt/apache-jmeter-5.5/lib && \
+          echo 'Listing contents of /opt/apache-jmeter-5.5/bin:' && \
+          ls -l /opt/apache-jmeter-5.5/bin"   
       
     - name: Prepare Results Directory
       run: |
@@ -33,7 +43,7 @@ jobs:
           -w /jmeter \
           --entrypoint /bin/sh \
           ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest \
-          -c "/opt/apache-jmeter-5.5/bin/jmeter -n -t /jmeter/PetJstore.jmx -l /jmeter/results/result.jtl -e -o /jmeter/results/report"
+          -c "/opt/apache-jmeter-5.5/bin/jmeter -n -t /jmeter/PetJstorelatest.jmx -l /jmeter/results/result.jtl -e -o /jmeter/results/report"
     
     - name: Upload JMeter Results
       uses: actions/upload-artifact@v3
