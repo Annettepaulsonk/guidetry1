@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: jmeter-with-plugins
+  IMAGE_NAME: jmeter-with-reqplugins
   IMAGE_TAG: latest
 
 jobs:
@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: Dockerfile
+        file: Dockerfile2
         push: true
         tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
        
