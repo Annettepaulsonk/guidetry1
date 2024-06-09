@@ -1,4 +1,4 @@
-name: Run JMeter
+name: Run JMeter Aggregate Report
 
 on:
   workflow_dispatch:
