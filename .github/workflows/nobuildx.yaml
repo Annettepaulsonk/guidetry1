@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: Dockerfile3
+        file: Dockerfile4
         push: true
         tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
        
