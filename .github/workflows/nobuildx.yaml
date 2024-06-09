@@ -47,4 +47,4 @@ jobs:
 
     -  name: Check JMeter Bin Path
        run: |
-        docker run --rm ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ls -l /opt/apache-jmeter-5.5/bin
+        docker run --rm --entrypoint /bin/sh ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -c "ls -l /opt/apache-jmeter-5.5/bin"
