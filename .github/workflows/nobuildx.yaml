@@ -48,3 +48,7 @@ jobs:
     -  name: Check JMeter Bin Path
        run: |
         docker run --rm --entrypoint /bin/sh ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -c "ls -l /opt/apache-jmeter-5.5/bin"
+
+    - name: Check JMeter Lib and Ext Paths
+      run: |
+        docker run --rm --entrypoint /bin/sh ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -c "ls -l /opt/apache-jmeter-5.5/lib && ls -l /opt/apache-jmeter-5.5/lib/ext"
