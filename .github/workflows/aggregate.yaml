@@ -19,11 +19,11 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Pull Docker Image
-      run: docker pull ghcr.io/${{ github.repository_owner }}/jmeter-with-reqplugins:latest
+      run: docker pull ghcr.io/${{ github.repository_owner }}/jmeter-with-reqpluginstry:latest
 
     - name: Verify JMeter Plugins
       run: |
-        docker run --rm --entrypoint /bin/sh ghcr.io/${{ github.repository_owner }}/jmeter-with-reqplugins:latest -c "\
+        docker run --rm --entrypoint /bin/sh ghcr.io/${{ github.repository_owner }}/jmeter-with-reqpluginstry:latest -c "\
           echo 'Listing contents of /opt/apache-jmeter-5.5/lib/ext:' && \
           ls -l /opt/apache-jmeter-5.5/lib/ext && \
           echo 'Listing contents of /opt/apache-jmeter-5.5/lib:' && \
@@ -42,7 +42,7 @@ jobs:
           -v ${{ github.workspace }}:/jmeter \
           -w /jmeter \
           --entrypoint /bin/sh \
-          ghcr.io/${{ github.repository_owner }}/jmeter-with-reqplugins:latest \
+          ghcr.io/${{ github.repository_owner }}/jmeter-with-reqpluginstry:latest \
           -c "/opt/apache-jmeter-5.5/bin/jmeter -n -t /jmeter/PetJstorelatest.jmx  -l /jmeter/results/result.jtl -e -o /jmeter/results/report"
 
     - name: Generate Aggregate Report
@@ -51,7 +51,7 @@ jobs:
           -v ${{ github.workspace }}:/jmeter \
           -w /jmeter \
           --entrypoint /bin/sh \
-          ghcr.io/${{ github.repository_owner }}/jmeter-with-reqplugins:latest \
+          ghcr.io/${{ github.repository_owner }}/jmeter-with-reqpluginstry:latest \
           -c '/opt/apache-jmeter-5.5/bin/JMeterPluginsCMD.sh --generate-csv /jmeter/results/aggregate_report.csv --input-jtl /jmeter/results/result.jtl --plugin-type AggregateReport && \
           ls -l /jmeter/results/'
 
