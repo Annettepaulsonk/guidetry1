@@ -20,7 +20,12 @@ jobs:
 
     - name: Pull Docker Image
       run: docker pull ghcr.io/${{ github.repository_owner }}/jmeter-with-plugins:latest
-
+      
+    - name: Prepare Results Directory
+      run: |
+        mkdir -p ${{ github.workspace }}/results
+        chmod -R 777 ${{ github.workspace }}/results
+        
     - name: Run JMeter Test
       run: |
         docker run --rm \
