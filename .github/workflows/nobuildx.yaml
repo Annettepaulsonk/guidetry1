@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}  
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
@@ -23,7 +23,7 @@ jobs:
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v2
       with:
-        registry: ghcr.io
+        registry: ${{ env.REGISTRY }}
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,9 +31,10 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}    
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
     - name: Build and Push Docker Image
+      id: build-and-push
       uses: docker/build-push-action@v5
       with:
         context: .
@@ -42,4 +43,13 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-   
+    - name: Output Docker Image Name
+      run: echo "DOCKER_IMAGE_NAME=${{ steps.build-and-push.outputs.image }}:${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
+
+    - name: Verify Docker Image
+      run: |
+        docker pull ${{ steps.meta.outputs.tags }}
+        docker images ${{ steps.meta.outputs.tags }}
+
+    - name: Print Docker Image Name
+      run: echo "Docker image name is ${{ env.DOCKER_IMAGE_NAME }}"
