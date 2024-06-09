@@ -6,7 +6,6 @@ COPY jmeter-plugins-cmd-2.2.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY jmeter-plugins-manager-1.10.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY jmeter-plugins-filterresults-2.2.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY jmeter-plugins-synthesis-2.2.jar /opt/apache-jmeter-5.5/lib/ext/
-COPY cmdrunner-2.2.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY loggingutils-1.0.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY commons-logging-1.1.3.jar /opt/apache-jmeter-5.5/lib/ext/
 COPY jmeter-plugins-cmn-jmeter-0.6.jar /opt/apache-jmeter-5.5/lib/ext/
